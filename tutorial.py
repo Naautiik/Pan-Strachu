@@ -1,5 +1,5 @@
 import discord
-from password import token
+from passy import token
 print(token)
 
 client = discord.Client()
