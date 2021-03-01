@@ -1,5 +1,6 @@
 import discord
-import os
+from password import token
+print(token)
 
 client = discord.Client()
 
@@ -14,4 +15,4 @@ async def on_message(message):
     if message.content.startswith("dupa"):
         await message.channel.send("fuck off I'm sleeping")
 
-client.run('')
+client.run(token)
