@@ -17,10 +17,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print(client.user)
     if message.author == client.user:
         return
-    if message.content.startswith("!strach"):
+    if message.content.lower().startswith("!strach"):
         mess = "Do matur pozostało ci " + calculate_matura() + " dni! Serdecznie zachęcam do przyklejenia tyłka do stołka!"
         await message.channel.send(mess)
     if message.content.startswith("jestem "):
@@ -30,7 +29,5 @@ async def on_message(message):
     if message.content.lower() == "stelar to gej":
         await message.channel.send("Zgadzam się całym swym strasznym serduszkiem")
 
-
-print(calculate_matura())
 client.run(TOKEN)
 
