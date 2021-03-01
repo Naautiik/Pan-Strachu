@@ -1,6 +1,7 @@
 import discord
 from datetime import date
 from passy import TOKEN
+from server import keep_alive
 
 def calculate_matura():
     today = date.today()
@@ -29,5 +30,6 @@ async def on_message(message):
     if message.content.lower() == "stelar to gej":
         await message.channel.send("Zgadzam się całym swym strasznym serduszkiem")
 
+keep_alive()
 client.run(TOKEN)
 
