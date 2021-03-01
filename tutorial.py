@@ -9,8 +9,6 @@ def calculate_matura():
     diff = diff.split(" ")[0]
     return diff
 
-print(TOKEN)
-
 client = discord.Client()
 
 @client.event
@@ -25,6 +23,13 @@ async def on_message(message):
     if message.content.startswith("!strach"):
         mess = "Do matur pozostało ci " + calculate_matura() + " dni! Serdecznie zachęcam do przyklejenia tyłka do stołka!"
         await message.channel.send(mess)
+    if message.content.startswith("jestem "):
+        if len(message.content) >= 7:
+            mess = "Cześć " + message.content[6:].strip() + ", jestem Pan Strachu"
+        await message.channel.send(mess)
+    if message.content.lower() == "stelar to gej":
+        await message.channel.send("Zgadzam się całym swym strasznym serduszkiem")
+
 
 print(calculate_matura())
 client.run(TOKEN)
