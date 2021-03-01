@@ -1,7 +1,10 @@
 import discord
+from discord.ext import tasks
+from flask import Flask
+from threading import Thread
 from datetime import date
 from passy import TOKEN
-from server import keep_alive
+# from server import keep_alive
 
 def calculate_matura():
     today = date.today()
@@ -29,6 +32,27 @@ async def on_message(message):
         await message.channel.send(mess)
     if message.content.lower() == "stelar to gej":
         await message.channel.send("Zgadzam się całym swym strasznym serduszkiem")
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Alive."
+
+def run():
+    app.run(host="0.0.0.0", port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
+
+@client.event
+async def on_ready():
+    change_status.start()
+    print("ready!")
+@tasks.loop(seconds=20)
+async def change_status():
+    await client.change_presence(activity=discord.Game("ping"))
 
 keep_alive()
 client.run(TOKEN)
