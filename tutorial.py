@@ -4,6 +4,7 @@ from flask import Flask
 from threading import Thread
 from datetime import date
 from passy import TOKEN
+from time import sleep
 # from server import keep_alive
 
 def calculate_matura():
@@ -50,9 +51,12 @@ def keep_alive():
 async def on_ready():
     change_status.start()
     print("ready!")
-@tasks.loop(seconds=20)
+
+@tasks.loop(seconds=120)
 async def change_status():
-    await client.change_presence(activity=discord.Game("ping"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name = "płaczu maturzystów"))
+    sleep(60)
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name = "błagań maturzystów"))
 
 keep_alive()
 client.run(TOKEN)
